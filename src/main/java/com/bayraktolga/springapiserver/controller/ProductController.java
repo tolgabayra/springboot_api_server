@@ -1,11 +1,11 @@
 package com.bayraktolga.springapiserver.controller;
 
 import com.bayraktolga.springapiserver.model.Product;
-import com.bayraktolga.springapiserver.model.User;
 import com.bayraktolga.springapiserver.service.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -23,14 +23,24 @@ public class ProductController {
         return ResponseEntity.ok(productService.create(body));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable Long id){
         productService.delete(id);
         return ResponseEntity.ok("User has been deleted.");
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Optional<Product>> update(@PathVariable Long id, @RequestBody User body){
+    @PutMapping("{id}")
+    public ResponseEntity<Optional<Product>> updateProduct(@PathVariable Long id, @RequestBody Product body){
         return ResponseEntity.ok(productService.update(id, body));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Product>> getAllProduct(){
+        return ResponseEntity.ok(productService.list());
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Optional<Product>> getProduct(@PathVariable Long id){
+        return ResponseEntity.ok(productService.show(id));
     }
 }

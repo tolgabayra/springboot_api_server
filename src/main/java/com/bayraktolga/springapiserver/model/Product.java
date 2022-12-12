@@ -2,12 +2,16 @@ package com.bayraktolga.springapiserver.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.*;
 
 @Table(name = "tb_products")
 
+@Getter
+@Setter
 @Data
 @Entity
 public class Product {

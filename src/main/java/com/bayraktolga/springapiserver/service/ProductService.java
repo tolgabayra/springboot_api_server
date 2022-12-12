@@ -23,6 +23,7 @@ public class ProductService {
         product.setName(productRequest.getName());
         product.setDescription(productRequest.getDescription());
         product.setPrice(productRequest.getPrice());
+        product.setStock(productRequest.getStock());
         product.setImages(productRequest.getImages());
 
         return productRepository.save(product);
@@ -34,7 +35,7 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public Optional<Product> update(Long id, User productRequest){
+    public Optional<Product> update(Long id, Product productRequest){
         Optional<Product> product = productRepository.findById(id);
             product.ifPresent(product1 -> {
                 product1.setName(productRequest.getName());
