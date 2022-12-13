@@ -1,8 +1,11 @@
 package com.bayraktolga.springapiserver.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_users")
@@ -11,9 +14,24 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotNull
+    @Column(unique = true)
     private String username;
+    @NotNull
+    @Column(unique = true)
     private String email;
     private String password;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            joinColumns = {
+                    @JoinColumn(name = "user_id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "role_id")
+            }
+    )
+    private Set<Role> roles;
 
     public User() {
         this.id = id;
@@ -54,8 +72,17 @@ public class User {
         this.password = password;
     }
 
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
     @Override
     public String toString() {
         return super.toString();
     }
+
 }
