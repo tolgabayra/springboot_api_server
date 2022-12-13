@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -22,7 +23,7 @@ public class User {
     private String email;
     private String password;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(
             joinColumns = {
                     @JoinColumn(name = "user_id")
@@ -31,7 +32,7 @@ public class User {
                     @JoinColumn(name = "role_id")
             }
     )
-    private Set<Role> roles;
+    private Collection<Role> roles;
 
     public User() {
         this.id = id;
@@ -72,11 +73,11 @@ public class User {
         this.password = password;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }
 
-    public Set<Role> getRoles() {
+    public Collection<Role> getRoles() {
         return roles;
     }
 
