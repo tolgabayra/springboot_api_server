@@ -2,6 +2,7 @@ package com.bayraktolga.springapiserver.controller;
 
 import com.bayraktolga.springapiserver.model.Product;
 import com.bayraktolga.springapiserver.service.ProductService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,7 @@ public class ProductController {
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable Long id){
         productService.delete(id);
-        return ResponseEntity.ok("User has been deleted.");
+        return ResponseEntity.ok("Product has been deleted.");
     }
 
     @PutMapping("{id}")

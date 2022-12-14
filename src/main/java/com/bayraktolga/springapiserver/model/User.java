@@ -32,7 +32,11 @@ public class User {
                     @JoinColumn(name = "role_id")
             }
     )
+
     private Collection<Role> roles;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private Collection<Group> groups;
 
     public User() {
         this.id = id;
@@ -79,6 +83,14 @@ public class User {
 
     public Collection<Role> getRoles() {
         return roles;
+    }
+
+    public Collection<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Collection<Group> groups) {
+        this.groups = groups;
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.bayraktolga.springapiserver.service;
 
 import com.bayraktolga.springapiserver.model.Product;
-import com.bayraktolga.springapiserver.model.User;
 import com.bayraktolga.springapiserver.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +40,8 @@ public class ProductService {
                 product1.setName(productRequest.getName());
                 product1.setDescription(productRequest.getDescription());
                 product1.setPrice(productRequest.getPrice());
-                product1.setStock(product1.getStock());
+                product1.setStock(productRequest.getStock());
+                product1.setImages(productRequest.getImages());
 
                 productRepository.save(product1);
 
