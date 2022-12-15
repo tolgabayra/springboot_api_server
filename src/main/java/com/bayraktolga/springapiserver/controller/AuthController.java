@@ -72,11 +72,17 @@ public class AuthController {
                             .setIssuer(user.getId().toString())
                             .setExpiration(new Date(System.currentTimeMillis() +60 *24*1000))
                             .signWith(key).compact();
+                    String refresh_token = Jwts.builder()
+                                    .setIssuer(user.getId().toString())
+                                            .signWith(key).compact();
 
                     System.out.println(access_token);
                     Cookie cookie = new Cookie("access_token", access_token);
+                    Cookie cookie1 = new Cookie("refresh_token", refresh_token);
                     cookie.setHttpOnly(true);
+                    cookie1.setHttpOnly(true);
                     response.addCookie(cookie);
+                    response.addCookie(cookie1);
                     return ResponseEntity.ok("Login is successfully.");
                 }catch (Exception e){
                     System.out.println(e);
