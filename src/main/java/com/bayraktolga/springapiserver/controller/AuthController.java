@@ -42,6 +42,8 @@ public class AuthController {
         this.roleRepository = roleRepository;
     }
 
+    System.out.println("tolga")
+
 
     @PostMapping("/register")
     public ResponseEntity<User> register (@RequestBody User body){
